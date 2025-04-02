@@ -1,17 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const url1Input = document.getElementById('url1');
+    const url2Input = document.getElementById('url2');
     const scoreboard1Div = document.getElementById('scoreboard1');
     const scoreboard2Div = document.getElementById('scoreboard2');
 
-    // Hardcoded URLs
-    const url1 = 'http://ec2-35-179-167-133.eu-west-2.compute.amazonaws.com:8080/';
-    const url2 = 'http://ec2-35-176-103-88.eu-west-2.compute.amazonaws.com:8080/';
+    // Pre-fill the URLs
+    url1Input.value = 'http://ec2-35-179-167-133.eu-west-2.compute.amazonaws.com:8080/';
+    url2Input.value = 'http://ec2-35-176-103-88.eu-west-2.compute.amazonaws.com:8080/';
 
-    // Fetch scoreboards immediately on page load
-    fetchScoreboard(1, url1);
-    fetchScoreboard(2, url2);
+    // Add event listeners to URL inputs
+    url1Input.addEventListener('change', () => fetchScoreboard(1));
+    url2Input.addEventListener('change', () => fetchScoreboard(2));
 
-    async function fetchScoreboard(instanceNumber, baseUrl) {
+    // Initial fetch
+    fetchScoreboard(1);
+    fetchScoreboard(2);
+
+    // Set up polling to refresh data every 30 seconds
+    setInterval(() => {
+        fetchScoreboard(1);
+        fetchScoreboard(2);
+    }, 30000);
+
+    async function fetchScoreboard(instanceNumber) {
+        const urlInput = instanceNumber === 1 ? url1Input : url2Input;
         const scoreboardDiv = instanceNumber === 1 ? scoreboard1Div : scoreboard2Div;
+        const baseUrl = urlInput.value.trim();
+
+        if (!baseUrl) {
+            scoreboardDiv.innerHTML = '<div class="error">Please enter a URL</div>';
+            return;
+        }
 
         // Show loading state
         scoreboardDiv.innerHTML = '<div class="loading">Loading...</div>';
