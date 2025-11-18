@@ -17,17 +17,6 @@
             flex-direction: column;
             gap: 20px;
         }
-        .url-inputs {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .url-input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
         .scoreboards {
             display: flex;
             gap: 20px;
@@ -44,6 +33,26 @@
             color: #333;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .connection-status {
+            font-size: 0.7em;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .connected {
+            background-color: #e6ffe6;
+            color: #006600;
+        }
+        .disconnected {
+            background-color: #ffe6e6;
+            color: #cc0000;
+        }
+        .error {
+            background-color: #fff3e6;
+            color: #cc6600;
         }
         .challenge-list {
             list-style: none;
@@ -94,18 +103,27 @@
 <body>
     <div class="container">
         <h1>Juice Shop Scoreboard Comparator</h1>
-        <div class="url-inputs">
-            <input type="text" id="url1" class="url-input" placeholder="Enter first Juice Shop URL">
-            <input type="text" id="url2" class="url-input" placeholder="Enter second Juice Shop URL">
-        </div>
         <div class="scoreboards">
             <div class="scoreboard">
-                <h2>Team 1</h2>
+                <h2>
+                    Team 1
+                    <span id="connection-status-1" class="connection-status disconnected">Disconnected</span>
+                </h2>
                 <div id="scoreboard1"></div>
             </div>
             <div class="scoreboard">
-                <h2>Team 2</h2>
+                <h2>
+                    Team 2
+                    <span id="connection-status-2" class="connection-status disconnected">Disconnected</span>
+                </h2>
                 <div id="scoreboard2"></div>
+            </div>
+            <div class="scoreboard">
+                <h2>
+                    Team 3
+                    <span id="connection-status-3" class="connection-status disconnected">Disconnected</span>
+                </h2>
+                <div id="scoreboard3"></div>
             </div>
         </div>
     </div>
