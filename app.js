@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const connectionStatus3 = document.getElementById('connection-status-3');
 
     // Hardcoded URLs
-    const url1 = 'http://ec2-3-8-212-48.eu-west-2.compute.amazonaws.com:3000/';
-    const url2 = 'http://ec2-35-177-142-42.eu-west-2.compute.amazonaws.com:3000/';
-    const url3 = 'http://ec2-35-179-112-188.eu-west-2.compute.amazonaws.com:3000/';
+    const url1 = 'https://juiceshop-team1.duckdns.org/';
+    const url2 = 'https://juiceshop-team2.duckdns.org/';
+    const url3 = 'https://juiceshop-team3.duckdns.org/';
 
     let ws1 = null;
     let ws2 = null;
