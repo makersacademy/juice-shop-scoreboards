@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const connectionStatus3 = document.getElementById('connection-status-3');
 
     // Hardcoded URLs
-    const url1 = 'https://juiceshop-team1.duckdns.org/';
-    const url2 = 'https://juiceshop-team2.duckdns.org/';
-    const url3 = 'https://juiceshop-team3.duckdns.org/';
+    const url1 = 'http://ec2-3-8-212-48.eu-west-2.compute.amazonaws.com:3000/';
+    const url2 = 'http://ec2-35-177-142-42.eu-west-2.compute.amazonaws.com:3000/';
+    const url3 = 'http://ec2-35-179-112-188.eu-west-2.compute.amazonaws.com:3000/';
 
     let ws1 = null;
     let ws2 = null;
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let team3Progress = 0;
 
     function connectWebSocket1() {
-        const wsUrl = url1.replace('https', 'ws') + 'socket.io/?EIO=3&transport=websocket';
+        const wsUrl = url1.replace('http', 'ws') + 'socket.io/?EIO=4&transport=websocket';
         try {
             if (ws1) {
                 ws1.close();
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function connectWebSocket2() {
-        const wsUrl = url2.replace('https', 'ws') + 'socket.io/?EIO=3&transport=websocket';
+        const wsUrl = url2.replace('http', 'ws') + 'socket.io/?EIO=4&transport=websocket';
         try {
             if (ws2) {
                 ws2.close();
@@ -52,10 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function connectWebSocket3() {
-        const wsUrl = url3.replace('https', 'ws') + 'socket.io/?EIO=3&transport=websocket';
+        const wsUrl = url3.replace('http', 'ws') + 'socket.io/?EIO=4&transport=websocket';
         try {
-            if (ws2) {
-                ws2.close();
+            if (ws3) {
+                ws3.close();
             }
             ws3 = new WebSocket(wsUrl);
             setupWebSocket3Handlers();
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const data = JSON.parse(event.data);
                 if (data.type === 'challengeSolved') {
-                    fetchScoreboard(1);
+                    fetchScoreboard(scoreboard1Div, url1);
                 }
             } catch (error) {
                 console.error('Error processing WebSocket message for Team 1:', error);
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const data = JSON.parse(event.data);
                 if (data.type === 'challengeSolved') {
-                    fetchScoreboard(2);
+                    fetchScoreboard(scoreboard2Div, url2);
                 }
             } catch (error) {
                 console.error('Error processing WebSocket message for Team 2:', error);
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateConnectionStatus(connectionStatus3, 'connected');
             // Only send message if connection is open
             if (ws3.readyState === WebSocket.OPEN) {
-                ws3.send('3probe');
+                ws3.send('2probe');
             }
         };
 
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const data = JSON.parse(event.data);
                 if (data.type === 'challengeSolved') {
-                    fetchScoreboard(3);
+                    fetchScoreboard(scoreboard3Div, url3);
                 }
             } catch (error) {
                 console.error('Error processing WebSocket message for Team 3:', error);
