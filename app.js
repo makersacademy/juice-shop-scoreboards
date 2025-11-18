@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let team3Progress = 0;
 
     function connectWebSocket1() {
-        const wsUrl = url1.replace('http', 'ws') + 'socket.io/?EIO=3&transport=websocket';
+        const wsUrl = url1.replace('https', 'ws') + 'socket.io/?EIO=3&transport=websocket';
         try {
             if (ws1) {
                 ws1.close();
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function connectWebSocket2() {
-        const wsUrl = url2.replace('http', 'ws') + 'socket.io/?EIO=3&transport=websocket';
+        const wsUrl = url2.replace('https', 'ws') + 'socket.io/?EIO=3&transport=websocket';
         try {
             if (ws2) {
                 ws2.close();
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function connectWebSocket3() {
-        const wsUrl = url3.replace('http', 'ws') + 'socket.io/?EIO=3&transport=websocket';
+        const wsUrl = url3.replace('https', 'ws') + 'socket.io/?EIO=3&transport=websocket';
         try {
             if (ws2) {
                 ws2.close();
